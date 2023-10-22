@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Section from './Section';
-import Notification from './Notification';
-import FeedbackOptions from './FeedbackOptions';
-import Statistics from './Statistics';
+import Section from '../Section/Section';
+import Notification from '../Notification/Notification';
+import FeedbackOptions from '../Feedback/FeedbackOptions';
+import Statistics from '../Statistics/Statistics';
 import styles from './App.module.css';
 
 class App extends Component {
@@ -38,22 +38,24 @@ class App extends Component {
       <div className={styles.appContainer}>
         <Section title="Please leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            // options={['good', 'neutral', 'bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.handleLeaveFeedback}
           />
         </Section>
 
         <Section title="Statistics">
-          {total === 0 ? (
-            <Notification message="There is no feedback" />
-          ) : (
+          {total ? (
             <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={total}
-              positivePercentage={positivePercentage}
-            />
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={total}
+            positivePercentage={positivePercentage}
+          />
+          ) : (
+            
+            <Notification message="There is no feedback" />
           )}
         </Section>
       </div>
